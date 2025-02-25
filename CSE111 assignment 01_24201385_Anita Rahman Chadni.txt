@@ -1,0 +1,659 @@
+// TASK 1
+
+
+import java.util.Scanner;
+
+public class task1 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        int [] array = new int[10];
+        System.out.println("Enter elements of array: ");
+        for(int i = 0; i < array.length; i++) {
+            array[i] = sc.nextInt();
+        }
+        System.out.println("Required array: ");
+        for(int elem : array) {
+            System.out.print(elem + " ");
+        }
+        System.out.println();
+        
+        //sum
+        int sum = 0;
+        for(int i = 0; i < 10; i++) {
+            if(array[i] > 0 && array[i] % 2 != 0) {
+                sum += array[i];
+            }
+            
+        }
+        System.out.println("Sum is: " +sum);
+        maxAndMin(array);
+        avg(array, sum);
+    }
+    //max and min
+    public static void maxAndMin(int [] array) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        
+        for(int i = 0; i < 10; i++) {
+            if(array[i] > 0 && array[i] % 2 != 0) {
+                if(array[i] < min) {
+                    min = array[i];
+                } if(array[i] > max) {
+                    max = array[i];
+                } 
+            }
+        }
+        System.out.println("Min value is: " +min);
+            System.out.println("Max value is: " +max);
+    }
+    // avg
+    public static void avg(int [] array, int sum) {
+        int count = 0;
+        double avg = 0.0;
+        for(int i = 0; i < 10; i++) {
+            if(array[i] > 0 && array[i] % 2 != 0) {
+                count++;
+        }
+    }
+        avg = (double) sum / count;
+        System.out.println("Avg is: " +avg);
+}
+}
+
+// TASK 02
+
+import java.util.Scanner;
+
+public class task2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter start range: ");
+        int start = sc.nextInt();
+        System.out.println("Enter end range: ");
+        int end = sc.nextInt();
+
+        int countPrime = 0;
+        for (int i = start; i <= end; i++) {
+            boolean foundPrime = true;   
+            if (i <= 1) {
+                foundPrime = false; 
+            } else {
+                for (int j = 2; j * j <= i; j++) { 
+                    if (i % j == 0) {
+                        foundPrime = false;
+                        break; 
+                    }
+                }
+            }
+// if prime is found
+            if (foundPrime) {
+                countPrime++;
+            }
+        }
+        System.out.println("Total prime numbers in the given range: " +countPrime);
+    }
+}
+
+
+// TASK 3
+
+
+import java.util.Scanner;
+
+public class task3 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter first word: ");
+        String s1 = sc.nextLine();
+        System.out.println("Enter second word: ");
+        String s2 = sc.nextLine();
+        String line = s1 + " " + s2;
+        int sum = 0;
+        for(int i = 0; i < line.length(); i++) {
+            char ch = line.charAt(i);
+            if(Character.isLetter(ch)) {
+            sum += (int) ch;
+            }
+        }
+        System.out.println("Resultant word: ");
+        System.out.println(line);
+        System.out.println("Resultant word's sum of only letters: ");
+        System.out.println(sum);
+    }
+}
+
+
+// TASK 4
+
+
+import java.util.Scanner;
+
+public class task4 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter a string with letters: ");
+        String s1 = sc.nextLine().toLowerCase();
+        String s2 = " ";
+        for(int i = 0; i < s1.length(); i++) {       
+            char ch = s1.charAt(i);
+            if(ch == 'a') { //if a, wraps to z
+                s2 += 'z'; 
+            } else if(ch > 'a' && ch <= 'z') {
+                char prev = (char) (ch - 1); // change to prev letter
+                 s2 += prev;
+            } else {
+                s2 += ch; //if not letter, stays same
+            }
+        }
+         System.out.println("Resultant string : ");
+        System.out.println(s2);
+    }
+}
+
+
+// TASK 5
+
+
+import java.util.Scanner;
+
+public class task5 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size: ");
+        int size = sc.nextInt();
+        int [] array = new int[size];
+        System.out.println("Enter array elements: ");
+        for(int i = 0; i < size; i++) {
+            array[i] = sc.nextInt();
+        }
+        System.out.println("Original array: ");
+        for(int elem : array) {
+            System.out.print(elem+ " ");
+        }
+        System.out.println();
+        System.out.println("Reversed array: ");
+        for(int i = 0, j = size - 1; i < j; i++, j--) { //same time erpr comma naile ;
+            int temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        for(int elem : array) {
+            System.out.print(elem+ " ");
+        }
+        System.out.println();
+        sc.close();
+    }
+}
+
+
+
+
+// TASK 6
+
+
+import java.util.Scanner;
+
+public class task6 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter size of array: ");
+        int size = sc.nextInt();
+        int [] array = new int[size];
+        System.out.println("Enter array elements: ");
+        for(int i = 0; i < size; i++) {
+            array[i] = sc.nextInt();
+        }
+        System.out.println("Array: ");
+        for(int elem : array) {
+            System.out.print(elem+ " ");
+        } 
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            // Checkin if this number has already been counted
+            boolean alreadyCounted = false;
+            for (int j = 0; j < i; j++) {
+                if (array[i] == array[j]) {
+                    alreadyCounted = true;
+                    break;
+                }
+            }
+            if (alreadyCounted) {
+                continue; // continue, to skip if already counted
+            }
+            int count = 0; //count
+            for (int j = 0; j < size; j++) {
+                if (array[i] == array[j]) {
+                    count++;
+                }
+            }
+            System.out.println(array[i]+ " has repeated: " +count+ " times");
+        }
+        sc.close();
+    }
+}
+
+
+// TASK 7
+
+
+import java.util.Scanner;
+
+public class task7 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size: ");
+        int input = sc.nextInt();
+        double [] array = new double[input];
+        System.out.println("Enter array elements: ");
+        for(int i = 0; i < input; i++) {
+            array[i] = sc.nextDouble();
+        }
+        System.out.println("Original array: ");
+        for(double elem : array) {
+            System.out.print(elem + " ");
+        }
+        double [] newArray = new double[input];
+        int index = 0;
+        newArray[index++] = array[0]; //increments after storing first val
+        int removedCount = 0;
+        // checks duplicates
+        for(int i = 1; i < input; i++) {
+            if(array[i] != array[i - 1]) {
+                newArray[index++] = array[i];
+            } else {
+                removedCount++;
+            }
+        }
+        System.out.println();
+        System.out.println("New array: ");
+        for(int i = 0; i < index; i++) {
+            System.out.print(newArray[i] + " ");
+        }
+        System.out.println();
+        System.out.println("Total removed elements: " +removedCount);
+    }
+}
+
+
+// TASK 8
+
+
+import java.util.Scanner;
+//import java.util.Arrays;
+
+public class task8 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter row number: ");
+        int row = sc.nextInt();
+         System.out.println("Enter column number: ");
+        int col = sc.nextInt();
+        int [][] array2D = new int[row][col];
+         System.out.println("Enter 2D array's elements: ");
+        for(int i = 0; i < row; i++) {
+            for(int j = 0; j < col; j++) {
+                array2D[i][j] = sc.nextInt();
+            }
+        }
+         System.out.println("2D array: ");
+         //System.out.println(Arrays.deepToString(array2D));
+         for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                System.out.print(array2D[i][j] + " ");
+            }
+            System.out.println(); 
+        }
+        int [] array1D = new int[row * col]; //bcz the size bcms = row * col
+        int index = 0;
+        // copying 2D to 1D
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                array1D[index++] = array2D[i][j]; //increments after storing
+            }
+        }
+         System.out.println("1D array: ");
+        for (int num : array1D) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+
+        sc.close();
+    }
+}
+
+
+// TASK 9
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class task9 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter array size: ");
+        int n = sc.nextInt();
+        int [][] array = new int[n][n];
+        System.out.println("Enter array elements: ");
+        
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+            array[i][j] = sc.nextInt();
+        }
+        }   
+        System.out.println("Original array: ");
+        System.out.println(Arrays.deepToString(array));
+        boolean identity = true;
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                if(i == j) {
+                    if(array[i][j] != 1) {
+                         identity = false;
+                         break;
+                    }
+                }
+                else if(i != j) {
+                    if(array[i][j] != 0) {
+                         identity = false;
+                         break;
+                    }
+                }
+        }
+        }
+        if(identity) {
+            System.out.println("It's an Identity matrix!");
+        } else {
+            System.out.println("It's not an Identity matrix!");
+        }
+    }
+}
+
+
+// TASK 10
+
+
+import java.util.Scanner;
+
+public class task10 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        int [][] array2D = {
+            {0, 0, 10, 0, -1},
+            {0, -1, 0, 0, -1},
+            {-1, 0, -1, 0, 0},
+            {0, -1, 7, 0, -1},
+            {0, -1, 0, -1, 0}
+        };
+
+        System.out.println("Initial Map:");
+        printMap(array2D);
+        int row = array2D.length;
+        int col = array2D[0].length;
+        int row_pos = -1, col_pos = -1;
+        // finding player's position and storing i,j
+        for(int i = 0; i < row; i++) {
+            for(int j = 0; j < col; j++) {
+                if(array2D[i][j] == 7) {
+                    row_pos = i;
+                    col_pos = j;
+                    break;
+                }
+            }
+        }
+        int moves = 5; // Total moves
+        while(moves > 0) {
+            // moves now ends at 1;
+            System.out.printf("Enter your move number %d: ", +(6 - moves));
+            String input = sc.nextLine().toUpperCase(); // converts all to biggy
+            int new_row = row_pos, new_col = col_pos; // stores new location
+            if(input.equals("UP")) {
+                new_row--;
+            } else if(input.equals("DOWN")) {
+                new_row++;
+            } else if(input.equals("RIGHT")) {
+                new_col++;
+            } else if(input.equals("LEFT")) {
+                new_col--;
+            } else {
+                System.out.println("Invalid move! Try again ;-;");
+                continue; // skips to next loop
+            }         
+        
+        // Check if the player moves outside the grid
+            if(new_row < 0 || new_row >= row || new_col < 0 || new_col >= col) {
+                System.out.println("Game over!");
+                break;
+            }
+            // checking if he stepped on the mine
+            if(array2D[new_row][new_col] == -1) {
+                System.out.println("Ghosts can't play. Game over! Better luck next time");
+            }
+            // Check if the player finds the treasure
+            if (array2D[new_row][new_col] == 10) {
+                System.out.println("Treasure found. You win! YAY");
+                array2D[row_pos][col_pos] = 0; // Clear old position
+                array2D[new_row][new_col] = 7; // Move player
+                System.out.println("Final state:");
+                printMap(array2D);
+                break;
+            }
+             // Move the player to the new position
+            array2D[row_pos][col_pos] = 0; // Clears old position
+            row_pos = new_row;
+            col_pos = new_col;
+            array2D[row_pos][col_pos] = 7; // Place player at new position
+
+            // **Print the updated map**
+            System.out.println("Current state:");
+            printMap(array2D);
+            moves--;
+        }
+    // if moves bcm 0
+    if(moves == 0) {
+            System.out.println("Failed to find the treasure TwT");
+        }
+        sc.close();
+    }
+// Function method to print the 2D grid
+    public static void printMap(int[][] array2D) {
+        // goes through each row (1D array itself)
+        for (int[] row : array2D) {
+            for (int cell : row) { // goes through each cell
+                System.out.print(cell + "\t");
+            }
+            System.out.println(); 
+        }
+        System.out.println(); // space after printing all of grid so that it's easy on eyes
+    }
+}
+
+
+                           // OPTIONAL TASK 1:
+
+import java.util.Scanner;
+
+public class task1 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter size of array:");
+        int size = sc.nextInt();
+        int [] array = new int[size];
+        System.out.println("Enter array elements:");
+        for(int i = 0; i < size; i++) {
+            array[i] = sc.nextInt();
+        }
+        System.out.println("Original array:");
+        for(int elem : array) {
+            System.out.println(elem + " ");
+        }
+        System.out.println("Enter a number to be removed:");
+        int removeNumber = sc.nextInt();
+        int removeIndex = -1;
+       for(int i = 0; i < size; i++) {
+           if(array[i] == removeNumber) {
+               removeIndex = i;
+               break;
+           }
+        }
+       if(removeIndex == -1) {
+           System.out.println("Element is not found!");
+       } else  {
+            // Create a new array with one less size
+            int[] newArray = new int[size - 1];
+            int newIndex = 0;
+            // copy in new array first then increment
+            for (int i = 0; i < size; i++) {
+                if (i != removeIndex) {
+                    newArray[newIndex++] = array[i];
+                }
+            }
+            System.out.println("New array: ");
+           for (int elem : newArray) {
+                System.out.print(elem + " ");
+            }
+           System.out.println();
+    }
+    }
+}
+
+                          // OPTIONAL TASK 2:
+import java.util.*;
+
+public class LargestSmallest {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        // Task 2
+        int[] arr = new int[5];
+        System.out.println("Enter 5 numbers:");
+        for (int i = 0; i < 5; i++) {
+            arr[i] = sc.nextInt();
+        }
+        
+        int largest = arr[0], smallest = arr[0];
+        int largestPos = 0, smallestPos = 0;
+        
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > largest) {
+                largest = arr[i];
+                largestPos = i;
+            }
+            if (arr[i] < smallest) {
+                smallest = arr[i];
+                smallestPos = i;
+            }
+        }
+        
+        System.out.println("The largest number " + largest + " was found at " + largestPos + ".");
+        System.out.println("The smallest number " + smallest + " was found at " + smallestPos + ".");
+    }
+}
+                        // OPTIONAL TASK 3:
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class task3 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of elements: ");
+        int size = sc.nextInt();
+        int[] array = new int[size]; 
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < size; i++) {
+            array[i] = sc.nextInt();
+        }
+
+        // Sort the array in ascending
+        Arrays.sort(array);
+        
+        System.out.println("Sorted in ascending Order: " + Arrays.toString(array));
+    
+        double median;
+        if (size % 2 == 0) {
+            // If even, median is the average of the two middle numbers
+            median = (array[size / 2 - 1] + array[size / 2]) / 2.0;
+        } else {
+            // If odd, median is the middle element
+            median = array[size / 2];
+        }
+
+        System.out.println("The median is " + median + ".");
+    }
+}
+                                   // OPTIONAL TASK 4:
+                      
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class task4 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of rows: ");
+        int rows = sc.nextInt();
+        System.out.println("Enter number of columns: ");
+        int cols = sc.nextInt();
+        System.out.println("Enter array elements: ");
+        int [][] array = new int [rows][cols];
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                array[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Array: ");
+        System.out.println(Arrays.deepToString(array));
+        System.out.println("Enter a number to multiply with: ");
+        int k = sc.nextInt();
+        System.out.println(Arrays.deepToString(array));
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                array[i][j] *= k; // array[i][j] = array[i][j] * k;
+            }
+            System.out.println();
+        }
+        System.out.println("Array after scalar multiplication: ");
+        System.out.println(Arrays.deepToString(array));
+    }
+}
+                              // OPTIONAL TASK 5:
+
+import java.util.Scanner;
+import java.util.Arrays;
+
+public class task5 {
+    public static void main(String [] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter number of rows: ");
+        int rows = sc.nextInt();
+        System.out.println("Enter number of columns: ");
+        int cols = sc.nextInt();
+        System.out.println("Enter array elements: ");
+        int [][] array = new int [rows][cols];
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                array[i][j] = sc.nextInt();
+            }
+        }
+        System.out.println("Array: ");
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                System.out.print(array[i][j] + " ");
+            }
+            System.out.println();
+        }
+        // transpose exchanging rows and cols
+        int [][] transpose = new int [cols][rows];
+        for(int i = 0; i < rows; i++) {
+            for(int j = 0; j < cols; j++) {
+                transpose[j][i] = array[i][j];
+            }
+        }
+        System.out.println("Transposed array: ");
+        for(int i = 0; i < cols; i++) { // bcz here cols bcm rows and vice-versa
+            for(int j = 0; j < rows; j++) {
+                System.out.print(transpose[i][j] + " ");
+            }
+            System.out.println();
+        }
+        sc.close();
+    }
+}
