@@ -1,0 +1,223 @@
+// TASK 01
+
+
+public class UniversityTester {
+    public static void main(String [] args) {
+        
+        University u1 = new University();
+        University u2 = new University();
+        
+        // printing locations
+        System.out.println("Location of first uni: " + u1);
+        System.out.println("Location of second uni: " + u2);
+        System.out.println();
+        
+        System.out.println("Name of first uni: " + u1.name); // print default value
+        System.out.println("Country of first uni: " + u1.country);
+        System.out.println();
+        
+        System.out.println("Name of second uni: " + u2.name); // print default value
+        System.out.println("Country of second uni: " + u2.country);
+        System.out.println();
+        
+        // ANS TO PART A: locations are not same
+        u1.name = "Imperial College London"; //initialize
+        u1.country = "England";
+        System.out.println("Name of first uni: " + u1.name); // print updated value
+        System.out.println("Country of first uni: " + u1.country);
+        System.out.println();
+        
+        u2.name = "BRAC University"; //initialize
+        u2.country = "Bangladesh";
+        System.out.println("Name of second uni: " + u2.name); // print updated value
+        System.out.println("Country of second uni: " + u2.country);
+        
+        // ANS TO PART B: Yes, instance var of both object has changed and no both are not same value
+    }
+}
+
+
+
+// TASK 02 
+
+class Student {
+    public String name;
+    public int id;
+}
+
+
+// TASK 03
+
+
+
+//import java.util.Scanner;
+// u can also use a scanner lol
+class CSECourse {
+    // initializing like output in task 3
+    public String courseName = "Programming Language II";
+    public String courseCode = "CSE 111";
+    public int credit = 3;
+}
+
+
+// TASK 04
+
+class ImaginaryNumber {
+    
+    // creating instance vars / flieds - stores data of an specific object
+    public int realPart;
+    public int imaginaryPart;
+    
+    // instance method - can access ins var, used when needed to refer to specific instance
+    // static method - cant access ins var, bcz they belong to a cls not a specific instance, needs a parameter
+    
+    public ImaginaryNumber() { // constructor - Same name as cls - no return type, not even void
+    this.realPart = 0; // initializing
+    this.imaginaryPart = 0; // this gives access to value of ins var
+    }
+    
+    public void printNumber() {
+        System.out.println(realPart + " + " + imaginaryPart + "i ");
+    }
+}
+
+// TASK 05
+
+class Course {
+    public String courseName;
+    public String courseCode;
+    public int courseCredit;
+    
+    // instance method to update info
+    public void updateDetails (String courseName, String courseCode, int courseCredit) {
+        // 'this' refers to the instance variables of the current object
+        // ins var      - parameters passed
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+        this.courseCredit = courseCredit;
+    }
+    
+    // instant method to print updated infos
+    public void displayCourse() {
+        System.out.println("Course Name: " + this.courseName);
+        System.out.println("Course Code: " + this.courseCode);
+        System.out.println("Course Credit: " + this.courseCredit);
+    }
+}
+
+
+// TASK 06
+
+class Assignment {
+    public int tasks;
+    public String difficulty;
+    public boolean submission;
+    
+    public Assignment() { // constructor
+        this.tasks = 0;
+        this.difficulty = "null";
+        this.submission = false;
+    }
+    public void printDetails() {
+        System.out.println("Number of task: " + tasks);
+        System.out.println("Difficulty level: " + difficulty);
+        System.out.println("Submission required: " + submission);
+    }
+    public String makeOptional() {
+        if(submission) { // true
+            return "Assignment will not require submission";
+        } else {  // false
+            return "Submission is already not required";
+        }
+    }
+}
+
+
+
+// TASK 07
+
+class CellPhone {
+    public String model = "unknown";
+    public String [] contacts = new String[3];
+    public int contactCount = 0;
+     
+    public void printDetails() {
+        System.out.println("Phone model: " + model);
+        System.out.println("Contacts stored: " + contactCount);
+        if(contactCount > 0) {
+            System.out.println("Stored Contacts: ");
+            for(int i = 0; i < contactCount; i++) {
+                System.out.println(contacts[i]);
+            }
+        }
+    }
+    public void storeContact(String contact) { 
+        if(contactCount < 3) {
+            contacts[contactCount] = contact;
+            contactCount++;
+            System.out.println("Contact stored");
+        } else {
+            System.out.println("Memory full. New contact can't be stored.");
+        }
+    }
+}
+
+
+// TASK 08
+
+
+class Employee {
+    public String name;
+    public double salary;
+    public String designation;
+    
+    public Employee() { // initialize 
+        this.salary = 30000;
+        this.designation = "Junior";
+    }
+    
+    public String newEmployee (String employeeName) {
+        this.name = employeeName; // passing name
+        return name;
+    } 
+    
+       // print
+
+    public void displayInfo() {
+        System.out.println("Employee Name: " + name);
+        System.out.println("Employee Salary: " + salary + " Tk");
+        System.out.println("Employee Designation: " + designation);
+    }
+    
+    // calc tax
+
+    public void calculateTax () {
+        if(salary > 50000) {
+            System.out.println(name + " Tax amount: " + (salary * 0.30) + " Tk");
+        } else if(salary > 30000) {
+            System.out.println(name + " Tax amount: " + (salary * 0.10) + " Tk");
+        } else {
+            System.out.println("No need to pay tax");
+        }
+    }
+    
+    // promotion
+
+    public void promoteEmployee (String newDesignation) {        
+        if(newDesignation.equalsIgnoreCase("senior")) {
+            this.salary += 25000;
+            this.designation = "Senior";
+            System.out.println(name + " has been promoted to " + designation);
+        } else if(newDesignation.equalsIgnoreCase("lead")) {
+            this.salary += 50000;
+            this.designation = "Lead";
+            System.out.println(name + " has been promoted to " + designation);
+        } else if(newDesignation.equalsIgnoreCase("Manager")) {
+            this.salary += 75000;
+            this.designation = "Manager";
+            System.out.println(name + " has been promoted to " + designation);
+        } else {
+            System.out.println("Invalid Designation");
+        }
+    }
+}
