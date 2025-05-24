@@ -1,0 +1,604 @@
+// TASK 01
+
+class Vaccine {
+    private String name;
+    private String origin;
+    private int daysBetweenDoses;
+    
+    public Vaccine(String name, String origin, int daysBetweenDoses) {
+        this.name = name;
+        this.origin = origin;
+        this.daysBetweenDoses = daysBetweenDoses;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public int getDaysBetweenDoses() {
+        return daysBetweenDoses;
+    }
+}
+
+class Person {
+    private String name;
+    private int age;
+    private String type;
+    private Vaccine vaccine;
+    private boolean firstDose;
+    private boolean secondDose;
+    private static final int MINIMUM_AGE = 25;
+    
+    public Person(String name, int age, String type) {
+        this.name = name;
+        this.age = age;
+        this.type = type;
+    }
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+        this.type = "General Citizen";
+    }
+    
+    public void pushVaccine(Vaccine newVaccine) {
+        pushVaccine(newVaccine, "1st Dose");
+    }
+    
+    public void pushVaccine(Vaccine newVaccine, String doseType) {
+        // Check age requirement for non-students
+        if (!type.equals("Student") && age < MINIMUM_AGE) {
+            System.out.println("Sorry " + name + ", Minimum age for taking vaccines is " + MINIMUM_AGE + " years now.");
+            return;
+        }
+        
+        // First dose logic
+        if (doseType.equals("1st Dose")) {
+            if (vaccine == null) {
+                vaccine = newVaccine;
+                firstDose = true;
+                System.out.println("1st dose done for " + name);
+            } else if (firstDose && !secondDose) {
+                System.out.println("Sorry " + name + ", you already received your 1st dose.");
+            } else if (firstDose && secondDose) {
+                System.out.println("Sorry " + name + ", you already received both doses.");
+            }
+            return;
+        }
+        
+        // Second dose logic
+        if (doseType.equals("2nd Dose")) {
+            if (vaccine == null || !firstDose) {
+                System.out.println("Sorry " + name + ", invalid dose request.");
+                return;
+            }
+            
+            if (secondDose) {
+                System.out.println("Sorry " + name + ", you already received both doses.");
+                return;
+            }
+            
+            // Check if trying to mix vaccines
+            if (!vaccine.getName().equals(newVaccine.getName())) {
+                System.out.println("Sorry " + name + ", you can't take 2 different vaccines");
+                return;
+            }
+            
+            // All checks passed, administer second dose
+            secondDose = true;
+            System.out.println("2nd dose done for " + name);
+        }
+    }
+    
+    public void showDetail() {
+        System.out.println("Name: " + name + " Age: " + age + " Type: " + type);
+        
+        if (vaccine != null) {
+            System.out.println("Vaccine name: " + vaccine.getName());
+            System.out.println("1st dose: " + (firstDose ? "Given" : "Not given"));
+            
+            if (secondDose) {
+                System.out.println("2nd dose: Given");
+            } else if (firstDose) {
+                System.out.println("2nd dose: Please come after " + vaccine.getDaysBetweenDoses() + " days");
+            }
+        }
+    }
+}
+
+
+// TASK 02
+
+class NikeBD {
+    public static int branchCount = 0;
+    public static int totalJordan = 0;
+    public static int totalCortez = 0;
+    public static int totalKobe = 0;
+    public static int totalSold = 0;
+    
+    public int jordan = 0;
+    public int cortez = 0;
+    public int kobe = 0;
+    public int sold = 0;
+    public String outletName;
+    
+    // constructor - 1
+    public NikeBD(String oN) {
+        this.outletName = oN;
+        branchCount++;
+    }
+    
+    // details() method
+    
+    public void details() {
+        System.out.println("Nike " + outletName + "  outlet:");
+        System.out.println("Products Currently Stocked: Jordan: " + jordan +
+                           ", Cortez: " + cortez + ", Kobe: " + kobe);
+        System.out.println("Sold: " + sold);
+    }
+    
+    // status() method
+    public static void status() {
+        System.out.println("Nike Bangladesh Status:");
+        System.out.println("Branches Opened: " + branchCount);
+        System.out.println("Currently Stocked: Jordan: " + totalJordan +
+                           ", Cortez: " + totalCortez + ", Kobe: " + totalKobe);
+        System.out.println("Sold: " + totalSold);
+    }
+    
+    // restockProducts method 1
+    public void restockProducts(String product, int qty) {
+        if(product.equals("Jordan")) {
+            jordan += qty;
+        }
+        else if(product.equals("Cortez")) {
+            cortez += qty;
+        }
+        else if(product.equals("Kobe")) {
+            kobe += qty;
+        }
+    }
+    
+    // restockProducts 2 method
+    public void restockProducts(String[] products, int[] qty) {
+        jordan += qty[0];
+        cortez += qty[1];
+        kobe += qty[2];
+    }
+    
+    // productSold method
+    public void productSold(String product1, int sold1, String product2, int sold2) {
+        if (product1.equals("Jordan")) {
+            jordan -= sold1;
+            totalJordan -= sold1;
+        } else if (product1.equals("Cortez")) {
+            cortez -= sold1;
+            totalCortez -= sold1;
+        } else if (product1.equals("Kobe")) {
+            kobe -= sold1;
+            totalKobe -= sold1;
+        }
+
+        if (product2.equals("Jordan")) {
+            jordan -= sold2;
+            totalJordan -= sold2;
+        } else if (product2.equals("Cortez")) {
+            cortez -= sold2;
+            totalCortez -= sold2;
+        } else if (product2.equals("Kobe")) {
+            kobe -= sold2;
+            totalKobe -= sold2;
+        }
+
+        sold += sold1 + sold2;
+        totalSold += sold1 + sold2;
+    }
+}
+
+// TASK 03
+
+class Football {
+  public String name;
+  public int age;
+  public int stamina;
+  
+  public Football(String name, int age, int stamina) {
+    this.name = name;
+    this.age = age;
+    this.stamina = stamina;
+  }
+  
+  public void display() {
+    System.out.println("Name: " + name);
+    System.out.println("Age: " + age);
+    System.out.println("Stamina: " + stamina);
+  }
+  
+  public void calculatePerformance() {
+    System.out.println("Performance is not defined yet");
+  }
+}
+
+class Striker extends Football {
+    public int goals;
+    public int shotsOnTarget;
+    
+    // constructor 1
+    public Striker(String n, int age, int s, int g, int sot) {
+        super(n, age, s);
+        this.goals = g;
+        this.shotsOnTarget = sot;
+    }
+    
+    // display() method
+    public void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Stamina: " + stamina);
+        System.out.println("Goals: " + goals);
+        System.out.println("Shots on target: " + shotsOnTarget);
+    }
+    
+    // calculatePerformance() method 
+    public void calculatePerformance() {
+        System.out.printf("Performance: %.3f\n", (double) goals / shotsOnTarget);
+    }
+}
+
+class Defender extends Football {
+    public int tackels;
+    public int interceptions;
+    
+    // constructor 1
+    public Defender(String n, int age, int s, int t, int i) {
+        super(n, age, s);
+        this.tackels = t;
+        this.interceptions = i;
+    }
+    
+    // display() method
+    public void display() {
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Stamina: " + stamina);
+        System.out.println("Tackles: " + tackels);
+        System.out.println("Interceptions: " + interceptions);
+    }
+    
+    // calculatePerformance() method 
+    public void calculatePerformance() {
+        System.out.printf("Performance: %.3f\n", (double) interceptions / tackels);
+    }
+}
+
+
+// TASK 04 
+
+// Nokia class 
+
+class Nokia extends Mobile {
+    public double balance;
+    
+    public Nokia(String model, boolean status, String code, double money) {
+        super(model, code, status);
+        this.balance = money;
+    }
+    // dialCall method
+    
+    public String dialCall(String num) {
+        String countryCode = num.substring(0, 3);
+        String country = getCountryName(countryCode);
+        if(balance > 0.0) {
+            if(simCardStatus) {
+                if(country != null && (country.equals("USA") || country.equals("Bangladesh"))) {
+            return "Dialing the number " + num + "  to " + country + " region.";
+                }
+                else {
+                    return "Dialing is not allowed in this region.";
+                }
+            }
+            else {
+                return "No SIM card available! Please check the SIM card connectivity.";
+            }
+        }
+        else {
+            return "Insufficient balance! Please recharge.";
+        }
+    }
+    // rechargeSIMCard(200) method
+    public void rechargeSIMCard(int n) {
+        balance += n;
+        System.out.println("Recharge successful! Current balance " + balance + " TK");
+    }
+    
+    // activateSimCard() method
+    
+    public void activateSimCard() {
+        simCardStatus = true;
+        System.out.println("SIM card is activated successfully.");
+    }
+    
+    // huhu
+    @Override
+  public String toString() {
+        
+    return "Model " + model + " is manufactured. " +
+        "Mobile Phone Detail:\nModel: " + model + "\nIMEICode: " + IMEICode + 
+        "\nSIM Card Status: " + simCardStatus + "\nBalance: " + balance + " TK";
+  }
+}
+
+// TASK 05
+
+// Dragon class 
+
+class Dragon extends MagicalCreature {
+    public int power;
+    
+    public Dragon(String name, int age, int power) {
+        super(name, age);
+        this.power = power;
+    }
+    
+    @Override 
+    public void makeSound() {
+    System.out.println(name + " roars with a fiery breath!");
+  }
+    @Override 
+    public void performMagic() {
+    System.out.println(name + " breathes fire with power level: " + power);
+  }  
+    // fly method
+    public void fly() {
+        System.out.println(name + " flies through the sky.");
+    }
+}
+
+// phoenix class 
+class Phoenix extends MagicalCreature {
+    public int rebirth;
+    
+    public Phoenix(String name, int age, int life) {
+        super(name, age);
+        this.rebirth = life;
+    }
+    
+    @Override 
+    public void makeSound() {
+    System.out.println(name + " sings an enchanting song.");
+  }
+    @Override 
+    public void performMagic() {
+    System.out.println(name + " is reborn with " + rebirth + " rebirth cycles.");
+  }  
+    // fly method
+    public void regenerate() {
+        System.out.println(name + " regenerates its body in a burst of flames.");
+    }
+}
+
+
+// TASK 06
+
+// Bondhus class
+  
+  class Bondhus extends SocialMedia {
+      public String[] msg;
+      public int count = 0;
+      
+      public Bondhus(String n, String mail) {
+          super(n, mail);
+          msg = new String[5];
+      }
+      // showsentbox method
+      public void showSentbox() {
+          if(count == 0) {
+              System.out.println(userName + "'s Sentbox: \nNo sent messages.");
+          }
+          else {
+              System.out.println(userName + "'s Sentbox: ");
+              for(int i = 0; i < count; i++) {
+                  System.out.println(msg[i]);
+              }
+          }
+      }
+      // sendMessage(" ") method
+      public void sendMessage(String text) {
+          if(count < msg.length) {
+          msg[count++] = text;
+          }
+          else {
+              System.out.println("Sentbox is full. ");
+          }
+      }
+      // toString
+      @Override
+  public String toString() {
+    return userName + "'s profile:"+ "\nUser Name: " + userName +
+        "\nEmail:" + email + "\nMessages Sent: " + count;
+  }
+  }
+  
+
+// TASK 07 
+
+// class patiemt
+class Patient {
+    public String name;
+    public String doc;
+    public String id;
+    public static int idCounter = 1;
+    public static int patientNo = 0;
+    public static int outPatient = 0;
+    
+    // constructor 1
+    public Patient(String name, String doc) {
+        this.name = name;
+        this.doc = doc;
+        this.id = String.format("P%02d", idCounter++);
+        patientNo++;
+        outPatient++;
+    }
+    // details() method
+    public static void details() {
+        System.out.println("Total patients: " + patientNo + ".");
+    }
+    // details(array) method
+    public static void details(Patient[] array) {
+        System.out.println("Details of " + array.length + " selected patients:");
+        for(Patient p : array) {
+        System.out.println("== == == == ==");
+        System.out.println(p);
+        System.out.println("== == == == ==");
+        }
+    }
+    // toString
+    @Override 
+    public String toString() {
+        return "Patient ID: " + id + ", Name: " + name + "\nDoctor: " + doc;
+    }
+}
+
+// class inpatient
+class InPatient extends Patient{
+    public static int inPatients = 0;
+    public String dept;
+    
+    // construtor 
+    public InPatient(String n, String doc, String specialty) {
+        super(n, doc);
+        this.dept = specialty;
+        inPatients++;
+        outPatient--;
+    }
+    // details() method
+    
+    public static void details() {
+        System.out.println("Total patients: " + patientNo);
+        System.out.println("Admitted In-Patients: " + inPatients);
+        System.out.println("Out-Patients: " + outPatient);
+    }
+    // toString
+    @Override
+    public String toString() {
+        return "New patient admitted in " + dept + ".\n" +
+       "Patient ID: " + id + ", Name: " + name + "\nDoctor: " + doc + "\nDepartment: " + dept;
+    }
+}
+
+// TASK 08
+
+// SteamDeck class
+class SteamDeck extends HandheldPC {
+
+    public SteamDeck(String model, int ram, int storage) {
+        super("Valve", model, "SteamOS", ram, storage);
+    }
+
+    @Override
+    public void bootUp() {
+        System.out.println("Steam Deck (" + getModel() + ") booting into " + getOS() + "...");
+    }
+
+    public void launchSteamBigPicture() {
+        System.out.println(getModel() + " is launching Steam Big Picture Mode.");
+    }
+}
+
+
+// ROGAlly class 
+class ROGAlly extends HandheldPC {
+    public boolean rgb;
+
+    public ROGAlly(String model, int ram, int storage, boolean rgb) {
+        super("ASUS", model, "Windows 11", ram, storage);
+        this.rgb = rgb;
+    }
+
+    @Override
+    public void bootUp() {
+        String rgbStatus = rgb ? "ON" : "OFF";
+        System.out.println("ROG Ally (" + getModel() + ") booting into " + getOS() + " with RGB " + rgbStatus);
+    }
+
+    public void syncRGBWithGame() {
+        System.out.println(getModel() + " syncing RGB lights with gameplay...");
+    }
+}
+
+
+// GameStop class
+class GameStop {
+    public static int totalDevice = 0;
+    private HandheldPC[] devices;
+    private int count;
+    public int steam;
+    public int rogally;
+
+    public GameStop(int size) {
+        devices = new HandheldPC[size];
+        this.count = 0;
+        System.out.println("GameStop brought " + size + " devices.");
+    }
+
+    public void addDevice(HandheldPC device) {
+    if (device instanceof SteamDeck || device instanceof ROGAlly) {
+        if (count < devices.length) {
+            devices[count++] = device;
+            totalDevice++;
+
+            // Increment the specific type counter here
+            if (device instanceof SteamDeck) {
+                steam++;
+            } else if (device instanceof ROGAlly) {
+                rogally++;
+            }
+
+            System.out.println(device.getBrand() + " " + device.getModel() + " added to shelf");
+        } else {
+            System.out.println("No more space on shelf for new devices.");
+        }
+    } else {
+        System.out.println("Invalid device type. Only SteamDeck and ROGAlly are allowed.");
+    }
+}
+
+
+    public void listDevices() {
+        System.out.println("Total devices: " + totalDevice);
+        System.out.println("Steam Decks: " + steam);
+        System.out.println("ROG Allies: " + rogally);
+        System.out.println("Devices in store:");
+        for (HandheldPC device : devices) {
+            if (device != null)
+                System.out.println("-" + device);
+        }
+    }
+
+    public void filterByOS(String os) {
+        System.out.println("Devices running " + os + ":");
+        for (HandheldPC device : devices) {
+            if (device != null && device.getOS().equals(os)) {
+                System.out.println(device);
+            }
+        }
+    }
+
+    public void startGamingSession(HandheldPC device) {
+        if (device instanceof SteamDeck) {
+            SteamDeck sd = (SteamDeck) device;
+            sd.bootUp();
+            sd.launchSteamBigPicture();
+        } else if (device instanceof ROGAlly) {
+            ROGAlly ra = (ROGAlly) device;
+            ra.bootUp();
+            if (ra.rgb) {
+                ra.syncRGBWithGame();
+            } else {
+                System.out.println(ra.getModel() + " has RGB disabled.");
+            }
+        } else {
+            device.bootUp();
+        }
+    }
+}

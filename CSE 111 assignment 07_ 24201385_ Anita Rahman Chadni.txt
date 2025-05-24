@@ -1,0 +1,345 @@
+// TASK 01
+
+
+
+
+
+import java.util.ArrayList;
+
+class BrowserHistory {
+    public static int count;
+    public ArrayList<String> web;
+    public String current;
+    public int n;
+    
+    // empty constructor
+    
+    public BrowserHistory (int n) {
+        this.count = 0;
+        this.current = null;
+        this.n = n;
+        this.web = new ArrayList<>(n);
+    }
+    // show history method
+    
+    public void showHistory() {
+        if(count == 0) {
+            System.out.println("No web pages visited yet. ");
+        } else {
+            System.out.println("Browser History: ");
+            for(String webby : web) {
+                System.out.println(webby);
+            }
+        }
+    }
+        
+        //current web method
+        
+        public void currentWeb() {
+            if(current == null) {
+            System.out.println("You have not visited any website yet! ");
+            } else {
+                System.out.println("Current web page: " + current);
+            }
+        }
+        
+        // visit web method
+        
+        public void visitWeb(String website) {
+            if(web.size() < n) {
+                web.add(website);
+                System.out.println("Visited: " + website + " ");
+                count++;
+                current = website;
+            } else {
+                System.out.println("History is full. Cannot visit " + website + " web page . ");
+            }
+        }
+        
+        // back method
+        
+        public void back() {
+            if(count > 0) {
+            web.remove(count - 1);
+            count--;
+            }
+            if(count > 0) {
+                current = web.get(count - 1);
+            } else {
+                current = null;
+            }
+        }
+    }
+
+
+
+
+// TASK 02
+
+
+
+
+
+import java.util.ArrayList;
+
+class CustomerService {
+    public ArrayList<String> names;
+    public int n;
+    
+    // constructor with a parameter
+    
+    public CustomerService(int n) {
+        this.n = n;
+        this.names = new ArrayList<>();
+    }
+    
+    // serve customer method 
+    
+    public void serveCustomer() {
+        if(names.size() == 0) {
+            System.out.println("No customers to serve ");
+        } else {  
+            System.out.println("Serving " + names.remove(0));
+        }
+    }
+    
+    // add customer method 
+    
+    public void addCustomer(String name) {
+        if(names.size() < n) {
+            names.add(name);
+            System.out.println("Added: " + name);
+            
+        } else {
+            System.out.println("Queue is full. Cannot add " + name);
+        }
+    }
+}
+
+
+
+// TASK 03
+
+
+ class Shape {
+  public String name;
+  public String color;
+
+  public void displayInfo() {
+    System.out.printf("Name: %s\nColor: %s\n", name, color);
+  }
+}
+
+ class Circle extends Shape {
+     
+     public double radius, area;
+     
+     public void area() {
+         area = Math.PI * radius * radius;
+         System.out.printf("Area of Red Circle: %.2f \n", area);
+     }
+}
+
+
+
+// TASK 04
+
+
+class Animal{ 
+  public int legs = 4;
+  public String sound = "Not defined";
+  
+  public void details(){
+    System.out.println("Legs: "+legs);
+    System.out.println("Sound: "+sound);
+  }
+}
+
+ class Dog extends Animal{
+   
+    public String name;
+    public String getName() {
+        return name;
+    }
+    public Dog() {
+    System.out.println("The dog says hello! ");
+    }
+
+public void updateSound(String n) {
+    sound = n;
+    
+}
+}  
+
+
+
+
+// TASK 05
+
+// Cricket_Tournament
+class Cricket_Tournament extends Tournament {
+  public int teams;
+  public String type;
+  
+  public Cricket_Tournament() {
+    super();  // calls Tournament() constructor
+    this.teams = 0;
+    this.type = "No type";
+  }
+  
+  public Cricket_Tournament(String t, int team, String ty) {
+    super(t);  // calls Tournament(String name) constructor
+    this.teams = team;
+    this.type = ty;
+  }
+  
+  public String detail() {
+    return "Cricket Tournament Name: " + getName() + " " +  "\n" +
+           "Number of Teams: " + teams + " " + "\n" +
+           "Type: " + type + " ";
+  }
+}
+
+// Tennis_Tournament
+class Tennis_Tournament extends Tournament {
+  public int noOfPlayers;
+  
+  public Tennis_Tournament(String t, int n) {
+    super(t);
+    this.noOfPlayers = n;
+  }
+  
+  public String detail() {
+    return "Tennis Tournament Name: " + getName() + " " + "\n" +
+           "Number of Players: " + noOfPlayers + " ";
+  }
+}
+
+
+// TASK 06
+
+// Book class
+
+class Book extends Product {
+  public String isbn;
+  public String publisher;
+  
+  public Book(int id, String t, int price, String isbn, String p) {
+    super(id, t, price); 
+    this.isbn = isbn;
+    this.publisher = p;
+  }
+  
+  public String printDetail() {
+    return super.getIdTitlePrice() + "\n" +
+           "ISBN: " + isbn + "\n" +
+           "Publisher: " + publisher;
+  }
+}
+
+// CD class
+
+class CD extends Product {
+  public String band;
+  public int time;
+  public String genre;
+  
+  public CD(int id, String t, int price, String b, int time, String g) {
+    super(id, t, price); // super can be called from a constructor only
+    this.band = b;
+    this.time = time;
+    this.genre = g;
+  }
+  
+  public String printDetail() {
+    return super.getIdTitlePrice() + "\n" +
+           "Band: " + band + "\n" +
+           "Duration: " + time + "\n" +
+           "Genre: " + genre;
+  }
+}
+
+
+// TASK 07
+
+// Class cse stud
+
+class CSEStudent extends Student {
+  private static int totalCSEStudents = 0;
+  private static String availableCourses = "CSE110 CSE111 CSE220 CSE221 ";
+
+  public CSEStudent(String n, int i) {
+    super(n, i);
+    totalCSEStudents++;
+  }
+
+  public static void details() {
+    System.out.println("Total CSE Students: " + totalCSEStudents);
+    System.out.println("Available Lab Based Courses: ");
+    System.out.println(availableCourses);
+  }
+
+  public void addLabBasedCourse(String course) {
+      if (availableCourses.contains(course)) {
+      courses += course + " ";
+    } else {
+      System.out.println("It is not a lab based course!");
+    }
+  }
+}
+
+
+
+// TASK 08
+
+// class player
+
+class Player extends SportsPerson {
+  private int totalGoal;
+  private int totalMatch;
+  private double goalRatio;
+
+  // constructor with para
+  
+  public Player(String team, String name, String role, int totalGoal, int totalMatch) {
+    super(team, name, role);
+    this.totalGoal = totalGoal;
+    this.totalMatch = totalMatch;
+  }
+
+  // method to calc ratio
+  
+  public void calculateRatio() {
+    goalRatio = (double) totalGoal / totalMatch;
+    earningPerMatch = (totalGoal * 1000) + (totalMatch * 10);
+  }
+
+  // print details method
+  
+  public void printDetails() {
+    System.out.println(getNameTeam());
+    System.out.println("Team Role: " + role);
+    System.out.println("Total Goal: " + totalGoal + ", Total Played: " + totalMatch);
+    System.out.printf("Goal Ratio: %.2f\n", goalRatio);
+    System.out.println("Match Earning: " + (int)earningPerMatch + "K");
+  }
+}
+
+// manager class
+
+class Manager extends SportsPerson {
+  private int matchWin;
+
+  public Manager(String team, String name, String role, int matchWin) {
+    super(team, name, role);
+    this.matchWin = matchWin;
+    earningPerMatch = matchWin * 1000;
+  }
+
+  public void printDetails() {
+    System.out.println(getNameTeam());
+    System.out.println("Team Role: " + role);
+    System.out.println("Total Win: " + matchWin);
+    System.out.println("Match Earning: " + (int)earningPerMatch + "K");
+  }
+}
