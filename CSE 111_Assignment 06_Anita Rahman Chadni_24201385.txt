@@ -1,0 +1,328 @@
+// TASK 01
+
+class Product {
+    private String name;
+    private double price;
+    private int quantity;
+    
+    public Product() {
+        this.name = "Unknown";
+        this.price = 0.0;
+        this.quantity = 0;
+    }
+    
+    public Product(String n, double p) {
+        this.name = n;
+        this.price = p;
+        
+    }
+    public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public int getQuantity() {
+    return quantity;
+  }
+
+  public void displayInfo() {
+    System.out.println("Product Name: " + name);
+    System.out.println("Price: $" + price);
+  }
+  public void displayInfo(boolean showQuantity) {
+      if(showQuantity) {
+          System.out.println("Quantity: " + quantity);
+      }
+  }
+}
+
+
+// TASK 02
+
+class Passenger {
+    public static int no_of_passenger;
+    public static double total_fare;
+    public String name;
+    public double fare;
+    public double bagWeight;
+    
+    public Passenger() {
+        this.no_of_passenger = 0;
+        this.total_fare = 0.0;
+        this.bagWeight = 0.0;
+        no_of_passenger++;
+    }
+    
+    public Passenger(String n, double f) {
+        this.name = n;
+        this.fare = f;
+        no_of_passenger++;
+    }
+    
+    public void passengerDetails() {
+        System.out.println("Name: " + name);
+        fare = (20 * fare) + bagWeight;
+        System.out.println("Fare: " + fare + " TK");
+        total_fare += fare;
+    }
+    
+    public double storeBaggageWeight(double bag) {
+        bagWeight = 10 * bag;
+        return bagWeight;
+    }
+}
+
+
+
+// TASK 03
+
+class Book {
+    public static int total_books_sold;
+    public static double total_revenue;
+    public String title;
+    public double discount;
+    public double price;
+    
+    public Book() {
+        
+        total_books_sold++;
+    }
+    
+    public Book(String t, double d) {
+        this.discount = d / 100;
+        this.title = t; 
+        total_books_sold++;
+    }
+    public void bookDetails() {
+        System.out.println("Title: " + title + " ");
+        price = 150 - (150 * discount);
+        System.out.println("Price after Discount: " + price + " TK");
+        total_revenue += price;
+    }
+}
+
+
+// TASK 04
+
+class Circle {
+  private double radius;
+  public static int count = 0;
+  public double area;
+
+  public Circle(double r) {
+    radius = r;
+    count++;
+  }
+
+  public void setRadius(double r) {
+    radius = r;
+  }
+
+  public double getRadius() {
+    return radius;
+  }
+
+  public double area() {
+    area = Math.PI * radius * radius;
+    return area;
+  }
+}
+
+
+// TASK 05
+
+import java.util.ArrayList;
+
+ class Borrower {
+    public static int book_count[] = {3, 3, 3};
+    public static String book_name[] = {"Pather Panchali", "Durgesh Nandini", "Anandmath"};
+
+    private String name;
+    private ArrayList<String> borrowedBooks;
+
+    public Borrower(String name) {
+        this.name = name;
+        this.borrowedBooks = new ArrayList<>();
+    }
+
+    public static void bookStatus() {
+        System.out.println("Available Books: ");
+        for (int i = 0; i < book_name.length; i++) {
+            System.out.println(book_name[i] + ": " + book_count[i]);
+        }
+    }
+
+    public static int remainingBooks(String book) {
+        for (int i = 0; i < book_name.length; i++) {
+            if (book_name[i].equals(book)) {
+                return book_count[i];
+            }
+        }
+        return 0;
+    }
+
+    public void borrowBook(String book) {
+        for (int i = 0; i < book_name.length; i++) {
+            if (book_name[i].equals(book)) {
+                if (book_count[i] > 0) {
+                    book_count[i]--;
+                    borrowedBooks.add(book);
+                    return;
+                } else {
+                    System.out.println("This book is not available.");
+                    return;
+                }
+            }
+        }
+    }
+
+    public void borrowerDetails() {
+        System.out.println("Name: " + name);
+        System.out.println("Books Borrowed: ");
+        for (String book : borrowedBooks) {
+            System.out.println(book);
+        }
+    }
+}
+
+// TASK 06
+
+class Cargo {
+    private static final double MAX_CAPACITY = 10.0;
+    private static double remainingCapacity = MAX_CAPACITY;
+    private static int nextId = 1;
+
+    private int id;
+    private String contents;
+    private double weight;
+    private boolean isLoaded;
+
+    public Cargo(String contents, double weight) {
+        this.id = nextId++;
+        this.contents = contents;
+        this.weight = weight;
+        this.isLoaded = false;
+    }
+
+    public static double capacity() {
+        return remainingCapacity; // getter
+    }
+
+    public void details() {
+        System.out.printf("Cargo ID: %d, Contents: %s, Weight: %.1f, Loaded: %b%n",
+                         id, contents, weight, isLoaded);
+    }
+
+    public void load() {
+        if (isLoaded) {
+            return;
+        }
+        if (weight <= remainingCapacity) {
+            remainingCapacity -= weight;
+            isLoaded = true;
+            System.out.println("Cargo " + id + " loaded for transport.");
+        } else {
+            System.out.println("Cannot load cargo, exceeds weight capacity.");
+        }
+    }
+
+    public void unload() {
+        if (isLoaded) {
+            remainingCapacity += weight;
+            isLoaded = false;
+            System.out.println("Cargo " + id + " unloaded.");
+        }
+    }
+}
+
+// TASK 07
+
+class Student {
+    private static int totalStudents = 0;
+    private static int cse = 0;
+    private static int other = 0;
+    
+    private int id;
+    private String name;
+    private double cgpa;
+    private String department;
+    
+    public Student(String n, double cgpa) {
+        totalStudents++;
+        this.id = totalStudents;
+        this.name = n;
+        this.cgpa = cgpa;
+        this.department = "CSE";
+        cse++;
+    }
+    
+    public Student(String n, double cgpa, String d) {
+        totalStudents++;
+        this.id = totalStudents;
+        this.name = n;
+        this.cgpa = cgpa;
+        this.department = d;
+        
+        if (department.equals("CSE")) {
+            cse++;
+        } else {
+            other++;
+        }
+    }
+    
+    public static void printDetails() {
+        System.out.println("Total Student(s): " + totalStudents);
+        System.out.println("CSE Student(s): " + cse);
+        System.out.println("Other Department Student(s): " + other);
+    }
+    
+    public void individualDetail() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println("CGPA: " + cgpa);
+        System.out.println("Department: " + department);
+    }
+}
+
+// TASK 08
+
+class Player {
+    public static int total = 0;
+    private static final int MAX_PLAYERS = 11;
+    private static String[] playersList = new String[MAX_PLAYERS];
+    
+    private String name;
+    private String country;
+    private int jerseyNo;
+    
+    public Player(String n, String c, int jn) {
+        if (total < MAX_PLAYERS) {
+            this.name = n;
+            this.country = c;
+            this.jerseyNo = jn;
+            playersList[total] = n;
+            total++;
+        }
+    }
+    
+    public String player_detail() {
+        return "Player Name: " + name + "\nJersey Number: " + jerseyNo + "\nCountry: " + country;
+    }
+    
+    public static void info() {
+        System.out.println("Total number of players: " + total);
+        System.out.print("Players enlisted so far: ");
+        for (int i = 0; i < total; i++) {
+            System.out.print(playersList[i]);
+            if (i < total - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println();
+    }
+}
+
+
